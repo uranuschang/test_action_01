@@ -31,7 +31,10 @@ jobs:
       run: |
         # 抓取上一個標籤到現在的所有 Commit 訊息
         # 如果是第一個標籤，則抓取所有紀錄
-        echo "body=$(git log --oneline -n 10)" >> $GITHUB_OUTPUT
+        # 使用 EOF 處理多行字串，避免空格和換行導致的錯誤
+        echo "body<<EOF" >> $GITHUB_OUTPUT
+        git log --oneline -n 10 >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
