@@ -39,31 +39,31 @@ jobs:
             TA_LIBRARY_PATH="ta-lib-$TALIB_C_VER\\_build;$LIB"
             TA_INCLUDE_PATH="ta-lib-$TALIB_C_VER\\include;$INCLUDE"
             PIP_NO_BUILD_ISOLATION=false
-      - uses: actions/upload-artifact@v4
-        with:
-          path: ./wheelhouse/*.whl
-          name: wheels-win-amd64
-  build_x86:
-    name: Build x86 wheels
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-2022]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: amd64_x86
-      - run: build.cmd
-        shell: cmd
-      - uses: pypa/cibuildwheel@v2.22.0
-        env:
-          CIBW_ARCHS_WINDOWS: x86
-          CIBW_ENVIRONMENT_WINDOWS: >
-            TA_LIBRARY_PATH="ta-lib-$TALIB_C_VER\\_build;$LIB"
-            TA_INCLUDE_PATH="ta-lib-$TALIB_C_VER\\include;$INCLUDE"
-            PIP_NO_BUILD_ISOLATION=false
-      - uses: actions/upload-artifact@v4
+      # - uses: actions/upload-artifact@v4
+      #   with:
+      #     path: ./wheelhouse/*.whl
+      #     name: wheels-win-amd64
+  # build_x86:
+  #   name: Build x86 wheels
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     matrix:
+  #       os: [windows-2022]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: ilammy/msvc-dev-cmd@v1
+  #       with:
+  #         arch: amd64_x86
+  #     - run: build.cmd
+  #       shell: cmd
+  #     - uses: pypa/cibuildwheel@v2.22.0
+  #       env:
+  #         CIBW_ARCHS_WINDOWS: x86
+  #         CIBW_ENVIRONMENT_WINDOWS: >
+  #           TA_LIBRARY_PATH="ta-lib-$TALIB_C_VER\\_build;$LIB"
+  #           TA_INCLUDE_PATH="ta-lib-$TALIB_C_VER\\include;$INCLUDE"
+  #           PIP_NO_BUILD_ISOLATION=false
+  #     - uses: actions/upload-artifact@v4
         with:
           path: ./wheelhouse/*.whl
           name: wheels-win32
