@@ -32,7 +32,7 @@ jobs:
           arch: amd64
       - run: build.cmd
         shell: cmd
-      - uses: pypa/cibuildwheel@v3.4.0
+      - uses: pypa/cibuildwheel@v2.22.0
         env:
           CIBW_ARCHS_WINDOWS: AMD64
           CIBW_ENVIRONMENT_WINDOWS: >
