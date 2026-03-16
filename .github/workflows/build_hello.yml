@@ -30,7 +30,13 @@ jobs:
       run: |
         # 將編譯出的 hello.exe 改名為包含版本號的名稱
         # github.ref_name 在 tag 觸發時會是 "v1.0.1"
-        ren hello.exe hello-${{ github.ref_name }}-win64.exe
+        echo "Current Ref: ${{ github.ref_name }}"
+        :: 檢查檔案是否存在，避免 ren 失敗
+        if exist hello.exe (
+            ren hello.exe hello-${{ github.ref_name }}-win64.exe
+        ) else (
+            echo "Error: hello.exe not found!" && exit 1
+        )
 
     - name: Generate Custom Changelog
       id: changelog
@@ -44,9 +50,11 @@ jobs:
         echo "EOF" >> $GITHUB_OUTPUT
 
     - name: Create GitHub Release
+      if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v2
       with:
-        files: hello.exe
+        # 這裡原本你寫 hello.exe，但因為上面改名了，所以這裡要改
+        files: hello-${{ github.ref_name }}-win64.exe
         name: Release ${{ github.ref_name }}
         # 核心功能：自動產生基於 PR/Commit 的筆記
         generate_release_notes: true 
