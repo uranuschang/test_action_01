@@ -24,6 +24,13 @@ jobs:
     - name: Run Build Script
       shell: cmd
       run: call hello\build.cmd
+      
+    - name: Rename executable with version
+      shell: cmd
+      run: |
+        # 將編譯出的 hello.exe 改名為包含版本號的名稱
+        # github.ref_name 在 tag 觸發時會是 "v1.0.1"
+        ren hello.exe hello-${{ github.ref_name }}-win64.exe
 
     - name: Generate Custom Changelog
       id: changelog
