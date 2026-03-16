@@ -64,6 +64,6 @@ jobs:
   #           TA_INCLUDE_PATH="ta-lib-$TALIB_C_VER\\include;$INCLUDE"
   #           PIP_NO_BUILD_ISOLATION=false
   #     - uses: actions/upload-artifact@v4
-        with:
-          path: ./wheelhouse/*.whl
-          name: wheels-win32
+  #      with:
+  #        path: ./wheelhouse/*.whl
+  #        name: wheels-win32
