@@ -1,0 +1,31 @@
+name: C Build on Windows
+
+on:
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup MSVC Developer Command Prompt
+      # 這個步驟很重要，它能幫你配置 cl.exe 的環境變數
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Run Build Script
+      shell: cmd
+      run: |
+        call hello\build.cmd
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: windows-executable
+        path: hello.exe
