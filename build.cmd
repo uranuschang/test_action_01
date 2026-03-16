@@ -11,7 +11,8 @@ set CMAKE_CONFIGURATION_TYPES=Release
 curl -L -o talib-c.zip https://github.com/TA-Lib/ta-lib/archive/refs/tags/v%TALIB_C_VER%.zip
 if errorlevel 1 exit /B 1
 
-curl -L -o talib-python.zip https://github.com/TA-Lib/ta-lib-python/archive/refs/tags/TA_Lib-%TALIB_PY_VER%.zip
+REM curl -L -o talib-python.zip https://github.com/TA-Lib/ta-lib-python/archive/refs/tags/TA_Lib-%TALIB_PY_VER%.zip
+curl -L -o talib-python.zip https://github.com/TA-Lib/ta-lib-python/archive/refs/tags/v%TALIB_PY_VER%.zip
 if errorlevel 1 exit /B 1
 
 tar -xzvf talib-c.zip
