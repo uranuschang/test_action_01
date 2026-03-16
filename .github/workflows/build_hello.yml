@@ -24,7 +24,7 @@ jobs:
     - name: Run Build Script
       shell: cmd
       run: call hello\build.cmd
-
+    
     - name: Rename executable with version
       shell: cmd
       run: |
